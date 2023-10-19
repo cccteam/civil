@@ -23,6 +23,8 @@ import (
 )
 
 func TestDates(t *testing.T) {
+	t.Parallel()
+
 	for _, test := range []struct {
 		date     Date
 		loc      *time.Location
@@ -58,6 +60,8 @@ func TestDates(t *testing.T) {
 }
 
 func TestDateIsValid(t *testing.T) {
+	t.Parallel()
+
 	for _, test := range []struct {
 		date Date
 		want bool
@@ -83,6 +87,8 @@ func TestDateIsValid(t *testing.T) {
 }
 
 func TestParseDate(t *testing.T) {
+	t.Parallel()
+
 	for _, test := range []struct {
 		str  string
 		want Date // if empty, expect an error
@@ -105,6 +111,8 @@ func TestParseDate(t *testing.T) {
 }
 
 func TestDateArithmetic(t *testing.T) {
+	t.Parallel()
+
 	for _, test := range []struct {
 		desc  string
 		start Date
@@ -164,6 +172,8 @@ func TestDateArithmetic(t *testing.T) {
 }
 
 func TestDateBefore(t *testing.T) {
+	t.Parallel()
+
 	for _, test := range []struct {
 		d1, d2 Date
 		want   bool
@@ -179,6 +189,8 @@ func TestDateBefore(t *testing.T) {
 }
 
 func TestDateAfter(t *testing.T) {
+	t.Parallel()
+
 	for _, test := range []struct {
 		d1, d2 Date
 		want   bool
@@ -194,6 +206,8 @@ func TestDateAfter(t *testing.T) {
 }
 
 func TestDateIsZero(t *testing.T) {
+	t.Parallel()
+
 	for _, test := range []struct {
 		date Date
 		want bool
@@ -212,6 +226,8 @@ func TestDateIsZero(t *testing.T) {
 }
 
 func TestTimeToString(t *testing.T) {
+	t.Parallel()
+
 	for _, test := range []struct {
 		str       string
 		time      Time
@@ -241,6 +257,8 @@ func TestTimeToString(t *testing.T) {
 }
 
 func TestTimeOf(t *testing.T) {
+	t.Parallel()
+
 	for _, test := range []struct {
 		time time.Time
 		want Time
@@ -255,6 +273,8 @@ func TestTimeOf(t *testing.T) {
 }
 
 func TestTimeIsValid(t *testing.T) {
+	t.Parallel()
+
 	for _, test := range []struct {
 		time Time
 		want bool
@@ -279,6 +299,8 @@ func TestTimeIsValid(t *testing.T) {
 }
 
 func TestTimeIsZero(t *testing.T) {
+	t.Parallel()
+
 	for _, test := range []struct {
 		time Time
 		want bool
@@ -297,6 +319,8 @@ func TestTimeIsZero(t *testing.T) {
 }
 
 func TestTimeBefore(t *testing.T) {
+	t.Parallel()
+
 	for _, test := range []struct {
 		t1, t2 Time
 		want   bool
@@ -314,6 +338,8 @@ func TestTimeBefore(t *testing.T) {
 }
 
 func TestTimeAfter(t *testing.T) {
+	t.Parallel()
+
 	for _, test := range []struct {
 		t1, t2 Time
 		want   bool
@@ -331,14 +357,16 @@ func TestTimeAfter(t *testing.T) {
 }
 
 func TestDateTimeToString(t *testing.T) {
+	t.Parallel()
+
 	for _, test := range []struct {
 		str       string
 		dateTime  DateTime
 		roundTrip bool // ParseDateTime(str).String() == str?
 	}{
-		{"2016-03-22T13:26:33", DateTime{Date{2016, 03, 22}, Time{13, 26, 33, 0}}, true},
-		{"2016-03-22T13:26:33.000000600", DateTime{Date{2016, 03, 22}, Time{13, 26, 33, 600}}, true},
-		{"2016-03-22t13:26:33", DateTime{Date{2016, 03, 22}, Time{13, 26, 33, 0}}, false},
+		{"2016-03-22T13:26:33", DateTime{Date{2016, 3, 22}, Time{13, 26, 33, 0}}, true},
+		{"2016-03-22T13:26:33.000000600", DateTime{Date{2016, 3, 22}, Time{13, 26, 33, 600}}, true},
+		{"2016-03-22t13:26:33", DateTime{Date{2016, 3, 22}, Time{13, 26, 33, 0}}, false},
 	} {
 		gotDateTime, err := ParseDateTime(test.str)
 		if err != nil {
@@ -358,6 +386,8 @@ func TestDateTimeToString(t *testing.T) {
 }
 
 func TestParseDateTimeErrors(t *testing.T) {
+	t.Parallel()
+
 	for _, str := range []string{
 		"",
 		"2016-03-22",           // just a date
@@ -372,14 +402,20 @@ func TestParseDateTimeErrors(t *testing.T) {
 }
 
 func TestDateTimeOf(t *testing.T) {
+	t.Parallel()
+
 	for _, test := range []struct {
 		time time.Time
 		want DateTime
 	}{
-		{time.Date(2014, 8, 20, 15, 8, 43, 1, time.Local),
-			DateTime{Date{2014, 8, 20}, Time{15, 8, 43, 1}}},
-		{time.Date(1, 1, 1, 0, 0, 0, 0, time.UTC),
-			DateTime{Date{1, 1, 1}, Time{0, 0, 0, 0}}},
+		{
+			time.Date(2014, 8, 20, 15, 8, 43, 1, time.Local),
+			DateTime{Date{2014, 8, 20}, Time{15, 8, 43, 1}},
+		},
+		{
+			time.Date(1, 1, 1, 0, 0, 0, 0, time.UTC),
+			DateTime{Date{1, 1, 1}, Time{0, 0, 0, 0}},
+		},
 	} {
 		if got := DateTimeOf(test.time); got != test.want {
 			t.Errorf("DateTimeOf(%v) = %+v, want %+v", test.time, got, test.want)
@@ -388,6 +424,8 @@ func TestDateTimeOf(t *testing.T) {
 }
 
 func TestDateTimeIsValid(t *testing.T) {
+	t.Parallel()
+
 	// No need to be exhaustive here; it's just Date.IsValid && Time.IsValid.
 	for _, test := range []struct {
 		dt   DateTime
@@ -405,6 +443,8 @@ func TestDateTimeIsValid(t *testing.T) {
 }
 
 func TestDateTimeIn(t *testing.T) {
+	t.Parallel()
+
 	dt := DateTime{Date{2016, 1, 2}, Time{3, 4, 5, 6}}
 	got := dt.In(time.UTC)
 	want := time.Date(2016, 1, 2, 3, 4, 5, 6, time.UTC)
@@ -414,6 +454,8 @@ func TestDateTimeIn(t *testing.T) {
 }
 
 func TestDateTimeBefore(t *testing.T) {
+	t.Parallel()
+
 	d1 := Date{2016, 12, 31}
 	d2 := Date{2017, 1, 1}
 	t1 := Time{5, 6, 7, 8}
@@ -434,6 +476,8 @@ func TestDateTimeBefore(t *testing.T) {
 }
 
 func TestDateTimeAfter(t *testing.T) {
+	t.Parallel()
+
 	d1 := Date{2016, 12, 31}
 	d2 := Date{2017, 1, 1}
 	t1 := Time{5, 6, 7, 8}
@@ -454,6 +498,8 @@ func TestDateTimeAfter(t *testing.T) {
 }
 
 func TestDateTimeIsZero(t *testing.T) {
+	t.Parallel()
+
 	for _, test := range []struct {
 		dt   DateTime
 		want bool
@@ -476,6 +522,8 @@ func TestDateTimeIsZero(t *testing.T) {
 }
 
 func TestMarshalJSON(t *testing.T) {
+	t.Parallel()
+
 	for _, test := range []struct {
 		value interface{}
 		want  string
@@ -495,6 +543,8 @@ func TestMarshalJSON(t *testing.T) {
 }
 
 func TestUnmarshalJSON(t *testing.T) {
+	t.Parallel()
+
 	var d Date
 	var tm Time
 	var dt DateTime
@@ -516,7 +566,8 @@ func TestUnmarshalJSON(t *testing.T) {
 		}
 	}
 
-	for _, bad := range []string{"", `""`, `"bad"`, `"1987-04-15x"`,
+	for _, bad := range []string{
+		"", `""`, `"bad"`, `"1987-04-15x"`,
 		`19870415`,     // a JSON number
 		`11987-04-15x`, // not a JSON string
 

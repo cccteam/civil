@@ -24,6 +24,8 @@ package civil
 import (
 	"fmt"
 	"time"
+
+	"github.com/go-playground/errors/v5"
 )
 
 // A Date represents a date (year, month, day).
@@ -40,6 +42,7 @@ type Date struct {
 func DateOf(t time.Time) Date {
 	var d Date
 	d.Year, d.Month, d.Day = t.Date()
+
 	return d
 }
 
@@ -47,8 +50,9 @@ func DateOf(t time.Time) Date {
 func ParseDate(s string) (Date, error) {
 	t, err := time.Parse("2006-01-02", s)
 	if err != nil {
-		return Date{}, err
+		return Date{}, errors.Wrap(err, "time.Parse()")
 	}
+
 	return DateOf(t), nil
 }
 
@@ -92,6 +96,7 @@ func (d Date) DaysSince(s Date) (days int) {
 	// We convert to Unix time so we do not have to worry about leap seconds:
 	// Unix time increases by exactly 86400 seconds per day.
 	deltaUnix := d.In(time.UTC).Unix() - s.In(time.UTC).Unix()
+
 	return int(deltaUnix / 86400)
 }
 
@@ -103,6 +108,7 @@ func (d Date) Before(d2 Date) bool {
 	if d.Month != d2.Month {
 		return d.Month < d2.Month
 	}
+
 	return d.Day < d2.Day
 }
 
@@ -127,6 +133,7 @@ func (d Date) MarshalText() ([]byte, error) {
 func (d *Date) UnmarshalText(data []byte) error {
 	var err error
 	*d, err = ParseDate(string(data))
+
 	return err
 }
 
@@ -150,6 +157,7 @@ func TimeOf(t time.Time) Time {
 	var tm Time
 	tm.Hour, tm.Minute, tm.Second = t.Clock()
 	tm.Nanosecond = t.Nanosecond()
+
 	return tm
 }
 
@@ -161,8 +169,9 @@ func TimeOf(t time.Time) Time {
 func ParseTime(s string) (Time, error) {
 	t, err := time.Parse("15:04:05.999999999", s)
 	if err != nil {
-		return Time{}, err
+		return Time{}, errors.Wrap(err, "time.Parse()")
 	}
+
 	return TimeOf(t), nil
 }
 
@@ -174,6 +183,7 @@ func (t Time) String() string {
 	if t.Nanosecond == 0 {
 		return s
 	}
+
 	return s + fmt.Sprintf(".%09d", t.Nanosecond)
 }
 
@@ -181,6 +191,7 @@ func (t Time) String() string {
 func (t Time) IsValid() bool {
 	// Construct a non-zero time.
 	tm := time.Date(2, 2, 2, t.Hour, t.Minute, t.Second, t.Nanosecond, time.UTC)
+
 	return TimeOf(tm) == t
 }
 
@@ -220,6 +231,7 @@ func (t Time) MarshalText() ([]byte, error) {
 func (t *Time) UnmarshalText(data []byte) error {
 	var err error
 	*t, err = ParseTime(string(data))
+
 	return err
 }
 
@@ -255,9 +267,10 @@ func ParseDateTime(s string) (DateTime, error) {
 	if err != nil {
 		t, err = time.Parse("2006-01-02t15:04:05.999999999", s)
 		if err != nil {
-			return DateTime{}, err
+			return DateTime{}, errors.Wrap(err, "time.Parse()")
 		}
 	}
+
 	return DateTimeOf(t), nil
 }
 
@@ -318,5 +331,6 @@ func (dt DateTime) MarshalText() ([]byte, error) {
 func (dt *DateTime) UnmarshalText(data []byte) error {
 	var err error
 	*dt, err = ParseDateTime(string(data))
+
 	return err
 }

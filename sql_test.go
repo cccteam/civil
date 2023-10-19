@@ -37,7 +37,9 @@ func TestDate_Value(t *testing.T) {
 		},
 	}
 	for _, tt := range tests {
+		tt := tt
 		t.Run(tt.name, func(t *testing.T) {
+			t.Parallel()
 			d := Date{
 				Year:  tt.fields.Year,
 				Month: tt.fields.Month,
@@ -91,7 +93,9 @@ func TestDate_Scan(t *testing.T) {
 		},
 	}
 	for _, tt := range tests {
+		tt := tt
 		t.Run(tt.name, func(t *testing.T) {
+			t.Parallel()
 			got := &Date{}
 			if err := got.Scan(tt.args.value); (err != nil) != tt.wantErr {
 				t.Errorf("Date.Scan() error = %v, wantErr %v", err, tt.wantErr)
@@ -130,7 +134,9 @@ func TestTime_Value(t *testing.T) {
 		},
 	}
 	for _, tt := range tests {
+		tt := tt
 		t.Run(tt.name, func(t *testing.T) {
+			t.Parallel()
 			tr := Time{
 				Hour:       tt.fields.Hour,
 				Minute:     tt.fields.Minute,
@@ -187,7 +193,9 @@ func TestTime_Scan(t *testing.T) {
 		},
 	}
 	for _, tt := range tests {
+		tt := tt
 		t.Run(tt.name, func(t *testing.T) {
+			t.Parallel()
 			got := &Time{}
 			if err := got.Scan(tt.args.value); (err != nil) != tt.wantErr {
 				t.Errorf("Time.Scan() error = %v, wantErr %v", err, tt.wantErr)
@@ -231,7 +239,9 @@ func TestDateTime_Value(t *testing.T) {
 		},
 	}
 	for _, tt := range tests {
+		tt := tt
 		t.Run(tt.name, func(t *testing.T) {
+			t.Parallel()
 			dt := DateTime{
 				Date: tt.fields.Date,
 				Time: tt.fields.Time,
@@ -302,7 +312,9 @@ func TestDateTime_Scan(t *testing.T) {
 		},
 	}
 	for _, tt := range tests {
+		tt := tt
 		t.Run(tt.name, func(t *testing.T) {
+			t.Parallel()
 			got := &DateTime{}
 			if err := got.Scan(tt.args.value); (err != nil) != tt.wantErr {
 				t.Errorf("DateTime.Scan() error = %v, wantErr %v", err, tt.wantErr)
