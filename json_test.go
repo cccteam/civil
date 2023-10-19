@@ -49,7 +49,9 @@ func TestDate_UnmarshalJSON(t *testing.T) {
 		},
 	}
 	for _, tt := range tests {
+		tt := tt
 		t.Run(tt.name, func(t *testing.T) {
+			t.Parallel()
 			got := &Date{}
 			if err := got.UnmarshalJSON(tt.args.data); (err != nil) != tt.wantErr {
 				t.Errorf("Date.UnmarshalJSON() error = %v, wantErr %v", err, tt.wantErr)
@@ -62,6 +64,8 @@ func TestDate_UnmarshalJSON(t *testing.T) {
 }
 
 func TestDate_MarshalJSON(t *testing.T) {
+	t.Parallel()
+
 	type fields struct {
 		Year  int
 		Month time.Month
@@ -102,7 +106,9 @@ func TestDate_MarshalJSON(t *testing.T) {
 		},
 	}
 	for _, tt := range tests {
+		tt := tt
 		t.Run(tt.name, func(t *testing.T) {
+			t.Parallel()
 			d := &Date{
 				Year:  tt.fields.Year,
 				Month: tt.fields.Month,
@@ -161,7 +167,9 @@ func TestTime_UnmarshalJSON(t *testing.T) {
 		},
 	}
 	for _, tt := range tests {
+		tt := tt
 		t.Run(tt.name, func(t *testing.T) {
+			t.Parallel()
 			got := &Time{}
 			if err := got.UnmarshalJSON(tt.args.data); (err != nil) != tt.wantErr {
 				t.Errorf("Time.UnmarshalJSON() error = %v, wantErr %v", err, tt.wantErr)
@@ -174,6 +182,8 @@ func TestTime_UnmarshalJSON(t *testing.T) {
 }
 
 func TestTime_MarshalJSON(t *testing.T) {
+	t.Parallel()
+
 	type fields struct {
 		Hour       int
 		Minute     int
@@ -197,7 +207,9 @@ func TestTime_MarshalJSON(t *testing.T) {
 		},
 	}
 	for _, tt := range tests {
+		tt := tt
 		t.Run(tt.name, func(t *testing.T) {
+			t.Parallel()
 			tr := &Time{
 				Hour:       tt.fields.Hour,
 				Minute:     tt.fields.Minute,
@@ -278,7 +290,9 @@ func TestDateTime_UnmarshalJSON(t *testing.T) {
 		},
 	}
 	for _, tt := range tests {
+		tt := tt
 		t.Run(tt.name, func(t *testing.T) {
+			t.Parallel()
 			got := &DateTime{}
 			if err := got.UnmarshalJSON(tt.args.data); (err != nil) != tt.wantErr {
 				t.Errorf("DateTime.UnmarshalJSON() error = %v, wantErr %v", err, tt.wantErr)
@@ -321,7 +335,9 @@ func TestDateTime_MarshalJSON(t *testing.T) {
 		},
 	}
 	for _, tt := range tests {
+		tt := tt
 		t.Run(tt.name, func(t *testing.T) {
+			t.Parallel()
 			dt := &DateTime{
 				Date: tt.fields.Date,
 				Time: tt.fields.Time,

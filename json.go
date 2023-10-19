@@ -49,7 +49,7 @@ func (t *Time) UnmarshalJSON(data []byte) error {
 
 	val, err := ParseTime(s)
 	if err != nil {
-		return fmt.Errorf("invalid time: %v", err)
+		return errors.Wrap(err, "invalid time")
 	}
 	*t = val
 
