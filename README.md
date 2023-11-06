@@ -4,7 +4,7 @@
 
 Civil provides Date, Time, and DateTime types.
 
-This package was put togeather to add support for SQL DB interfaces and Json interfaces, while maintining no changes to the upstream package so future updates will flow in easily.
+This package was put together to add support for SQL DB interfaces and Json interfaces while maintaining no changes to the upstream package so future updates will flow in easily.
 
 ## Source
 
