@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.0.4](https://github.com/cccteam/civil/compare/v0.0.3...v0.0.4) (2023-11-06)
+
+
+### Documentation
+
+* Add credits to README ([#6](https://github.com/cccteam/civil/issues/6)) ([5b394c6](https://github.com/cccteam/civil/commit/5b394c6d47071d5bc3f09e611ccfe31e8f59bc77))
+
 ## [0.0.3](https://github.com/cccteam/civil/compare/v0.0.2...v0.0.3) (2023-10-19)
 
 
