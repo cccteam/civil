@@ -26,3 +26,6 @@ jobs:
     with:
       go-version: ${{ needs.env-setup.outputs.go_version }}
       build-tags: '[""]'
+
+  semantic-pull-request-title:
+    uses: cccteam/github-workflows/.github/workflows/semantic-pull-request-title.yml@v4.1.0
