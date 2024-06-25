@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.0.5](https://github.com/cccteam/civil/compare/v0.0.4...v0.0.5) (2024-06-25)
+
+
+### Features
+
+* Update CI/CD Action scripts ([#10](https://github.com/cccteam/civil/issues/10)) ([e5dd949](https://github.com/cccteam/civil/commit/e5dd9492a56edbfc66348da1912c8e18ccdaed40))
+
 ## [0.0.4](https://github.com/cccteam/civil/compare/v0.0.3...v0.0.4) (2023-11-06)
 
 
